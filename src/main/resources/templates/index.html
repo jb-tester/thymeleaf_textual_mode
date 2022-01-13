@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf error</title>
+    <script th:inline="text" type="text/javascript">
+        function myFunc(url) {
+            console.log('[[${attr1}]]');
+            console.log(url);
+        }
+
+    </script>
+    <style th:inline="text">
+        body {
+           color: [[${fontColor}]];
+           background-color: [# th:text="${backgroundColor}"/];
+        }
+        button {
+            color: [[${buttonFontColor}]];
+            background-color: [# th:text="${buttonColor}"/];
+        }
+    </style>
+</head>
+<body>
+
+[[${attr1}]]
+
+<div th:with="myParam='myValue'">
+    [[${myParam}]]
+    <div th:with="myUrl=|@{/test}?id=${myParam}|">
+
+        <div>
+            <button th:onclick="myFunc([[${myUrl}]])"> test onclick</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
